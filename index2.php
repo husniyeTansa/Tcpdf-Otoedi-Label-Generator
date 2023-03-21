@@ -95,9 +95,6 @@ $style = array(
 $pdf->write2DBarcode('www.tcpdf.org', 'PDF417', 80, 90, 0, 30, $style, 'N');
 $pdf->Text(80, 85, 'PDF417 (ISO/IEC 15438:2006)');
 
-// -------------------------------------------------------------------
-// ---------------------------------------------------------
-
 // set font
 $pdf->SetFont('helvetica', '', 11);
 
@@ -124,11 +121,16 @@ $style = array(
     'stretchtext' => 4
 );
 
+
+$txt = "You can also export 2D barcodes\n hts";
+$pdf->MultiCell(70, 50, $txt, 0, 'J', false, 1, 125, 30, true, 0, false, true, 0, 'T', false);
+
+// ---------------------------------------------------------
+
 $pdf->write2DBarcode('www.tcpdf.org', 'PDF417', 80, 90, 0, 30, $style, 'N');
 $pdf->Text(80, 85, 'PDF417 (ISO/IEC 15438:2006)');
 
 // -------------------------------------------------------------------
-// ---------------------------------------------------------
 
 // set font
 $pdf->SetFont('helvetica', '', 11);
