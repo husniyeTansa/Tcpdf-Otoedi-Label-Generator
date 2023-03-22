@@ -100,10 +100,10 @@ $style2 = array(
 // CODE 128 AUTO
 //$pdf->Cell
 
-$txt = "SUPP (V) Plascam"; // testt
-// $pdf->MultiCell()
-$pdf->MultiCell(34, 0.3, $txt, 0, 'L', false, 1, 11.4, 8.5, true, 0, false, false, 0, 'T', false);
-//$pdf->SetY(30);
+$html = '<b style="font-size:9px;">SUPP (V) Plascam</b>';
+$pdf->SetY(8.5);
+$pdf->SetX(11.4);
+$pdf->writeHTML($html, true, false, true, false, '');
 
 $html = '<b style="font-size:52px;">DP9JA</b>';
 $pdf->SetY(8.5);
@@ -118,14 +118,16 @@ $pdf->write1DBarcode('VDP9JA', 'C128', 11.4, 11.5, 53.9, 13.5, 0.4, $style, 'N')
 $pdf->writeHTML('<hr style="width:75%;text-align:left;margin-left:0">', true, false, true, false, '');
 $pdf->write2DBarcode('[)>A06AP  NT1B  17A950AB5YZ9  AQ432AVDP9JAAD20230301A8V0145AA1L3HAM19031ALVMAN923222Z109AAABCTN', 'PDF417', 150, 12, 0, 0, $style2, 'N');
 
-$txt = "QTY (Q)";
-$pdf->MultiCell(54, 0.3, $txt, 0, 'L', false, 1, 11.4, 26, true, 0, false, false, 0, 'T', false);
+$html = '<b style="font-size:9px;">QTY (Q)</b>';
+$pdf->SetY(26);
+$pdf->SetX(11.4);
+$pdf->writeHTML($html, true, false, true, false, '');
 
 $html = '<b style="font-size:52px;">54</b>';
 $pdf->SetY(22);
 $pdf->SetX(65);
 $pdf->writeHTML($html, true, false, true, false, '');
-$pdf->MultiCell(54, 0.3, $txt, 0, 'L', false, 1, 11.4, 26, true, 0, false, false, 0, 'T', false);
+
 $html = '<b style="font-size:14px;">PCE</b>';
 $pdf->SetY(40);
 $pdf->SetX(72);
@@ -133,9 +135,9 @@ $pdf->writeHTML($html, true, false, true, false, '');
 
 
 //$pdf->Cell(0, 0, 'QTY (Q) 432 PCE', 0, 1);
-$pdf->write1DBarcode('Q432', 'C128', '', '', '', 13.5, 0.4, $style, 'N');
+$pdf->write1DBarcode('Q432', 'C128', 11.4, '', '', 13.5, 0.4, $style, 'N');
 
-$straightLineStyle = array('width' => 0.3, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(0, 0, 0)); 
+$straightLineStyle = array('width' => 0.3, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(0, 0, 0));
 $pdf->Line(85, 25, 85, 58, $straightLineStyle); // vertical line
 
 
@@ -172,6 +174,105 @@ $pdf->writeHTML($html, true, false, true, false, '');
 $pdf->writeHTML('<hr style="width:100%;text-align:left;margin-left:0">', true, false, true, false, '');
 
 
+$html = '<b style="font-size:48px;">NT1B 17A950AB5YZ9</b>';
+$pdf->SetY(60);
+$pdf->SetX(25);
+$pdf->writeHTML($html, true, false, true, false, '');
+
+
+$html = '<b style="font-size:9px;">PART (P)</b>';
+$pdf->SetY(80);
+$pdf->SetX(11.4);
+$pdf->writeHTML($html, true, false, true, false, '');
+
+
+$pdf->write1DBarcode('NT1B 17A950AB5YZ9', 'C128', 20, 74, 160, 20, 1, $style, 'N');
+
+
+$pdf->writeHTML('<hr style="width:100%;text-align:left;margin-left:0">', true, false, true, false, '');
+
+
+
+$html = '<b style="font-size:9px;">STR LOC 1</b>';
+$pdf->SetY(95);
+$pdf->SetX(11.4);
+$pdf->writeHTML($html, true, false, true, false, '');
+
+$html = '<b style="font-size:24px;">VM</b>';
+$pdf->SetY(99);
+$pdf->SetX(11.4);
+$pdf->writeHTML($html, true, false, true, false, '');
+
+
+
+$straightLineStyle = array('width' => 0.3, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(0, 0, 0));
+$pdf->Line(95, 94, 95, 109.5, $straightLineStyle); // vertical line
+
+$html = '<b style="font-size:9px;">DELIVERY DOC/ASN NUMBER</b>';
+$pdf->SetY(95);
+$pdf->SetX(97);
+$pdf->writeHTML($html, true, false, true, false, '');
+
+$html = '<b style="font-size:24px;">923222</b>';
+$pdf->SetY(99);
+$pdf->SetX(97);
+$pdf->writeHTML($html, true, false, true, false, '');
+
+
+
+///$pdf->write1DBarcode('Q432', 'C128', 11.4, '', '', 13.5, 0.4, $style, 'N');
+$pdf->write1DBarcode('923222', 'C128', 160, 96, '', 13.5, 0.4, $style, 'N');
+
+$pdf->writeHTML('<hr style="width:100%;text-align:left;margin-left:0">', true, false, true, false, '');
+
+
+$html = '<b style="font-size:12px;">NT1B 17A950AB5YZ9</b>';
+$pdf->SetY(110);
+$pdf->SetX(11.4);
+$pdf->writeHTML($html, true, false, true, false, '');
+
+$html = '<b style="font-size:9px;">SERIAL NO(S)</b>';
+$pdf->SetY(120);
+$pdf->SetX(11.4);
+$pdf->writeHTML($html, true, false, true, false, '');
+
+
+$html = '<b style="font-size:20px;">19032</b>';
+$pdf->SetY(117);
+$pdf->SetX(35);
+$pdf->writeHTML($html, true, false, true, false, '');
+
+
+$pdf->write1DBarcode('19032', 'C128', 11.4, 121, '', 16, 0.4, $style, 'N');
+
+
+$pdf->Line(105, 109.5, 105, 136, $straightLineStyle); // vertical line
+
+
+$html = '<p style="font-size:9px;">TO</p>';
+$pdf->SetY(140);
+$pdf->SetX(48);
+$pdf->writeHTML($html, true, false, true, false, '');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// add a page
+$pdf->AddPage();
 
 $pdf->Ln();
 
