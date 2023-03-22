@@ -246,13 +246,38 @@ $pdf->writeHTML($html, true, false, true, false, '');
 $pdf->write1DBarcode('19032', 'C128', 11.4, 121, '', 16, 0.4, $style, 'N');
 
 
-$pdf->Line(105, 109.5, 105, 136, $straightLineStyle); // vertical line
+$pdf->Line(105, 109.5, 105, 139, $straightLineStyle); // vertical line
 
 
-$html = '<p style="font-size:9px;">TO</p>';
-$pdf->SetY(140);
-$pdf->SetX(48);
+$html = '<b style="font-size:9px;">TO</b>';
+$pdf->SetY(110);
+$pdf->SetX(106);
 $pdf->writeHTML($html, true, false, true, false, '');
+
+
+$html = '<b style="font-size:9px;">Ford Valencia V5</b>';
+$pdf->SetY(114);
+$pdf->SetX(106);
+$pdf->writeHTML($html, true, false, true, false, '');
+
+
+$html = '<b style="font-size:9px;">CUST</b>';
+$pdf->SetY(120);
+$pdf->SetX(106);
+$pdf->writeHTML($html, true, false, true, false, '');
+
+
+$html = '<b style="font-size:24px;">0145A</b>';
+$pdf->SetY(125);
+$pdf->SetX(106);
+$pdf->writeHTML($html, true, false, true, false, '');
+
+
+$html = '<b style="font-size:9px; color:rgb(152,152,152);">ENG ALERT</b>';
+$pdf->SetY(135);
+$pdf->SetX(106);
+$pdf->writeHTML($html, true, false, true, false, '');
+
 
 
 
