@@ -55,7 +55,7 @@ $pdf->setBarcode(date('Y-m-d H:i:s'));
 $pdf->SetFont('helvetica', '', 11);
 
 // add a page
-$pdf->AddPage('L', 'A5');
+$pdf->AddPage('P', 'A4');
 // $pdf->Cell(0, 0, 'A5 LANDSCAPE', 1, 1, 'C');
 
 // print a message
@@ -86,10 +86,10 @@ $style = array(
 );
 
 $style2 = array(
-    'border' => true,
+    'border' => false,
     'vpadding' => 'auto',
     'hpadding' => 'auto',
-    'fgcolor' => array(0,0,0),
+    'fgcolor' => array(0, 0, 0),
     'bgcolor' => false, //array(255,255,255)
     'module_width' => 1, // width of a single module in points
     'module_height' => 1 // height of a single module in points
@@ -105,8 +105,6 @@ $txt = "SUPP (V) Plascam"; // testt
 $pdf->MultiCell(34, 0.3, $txt, 0, 'L', false, 1, 11.4, 8.5, true, 0, false, false, 0, 'T', false);
 //$pdf->SetY(30);
 
-
-
 $html = '<b style="font-size:52px;">DP9JA</b>';
 $pdf->SetY(8.5);
 $pdf->SetX(95);
@@ -114,15 +112,66 @@ $pdf->writeHTML($html, true, false, true, false, '');
 
 
 //$pdf->Cell(0, 0, 'SUPP (V) Plascam', 1, 0);
-$pdf->write1DBarcode('VDP9JA', 'C128', 11.4, 11.5, 53.9, 13.5, 0.4, $style, 'N');
+$pdf->write1DBarcode('VDP9JA', 'C128', 11.4, 11.5, 53.9, 13.5, 0.4, $style, 'N'); // 9.5 * 1.41 = 13.5
 //$pdf->write1DBarcode()
 
 $pdf->writeHTML('<hr style="width:75%;text-align:left;margin-left:0">', true, false, true, false, '');
 $pdf->write2DBarcode('[)>A06AP  NT1B  17A950AB5YZ9  AQ432AVDP9JAAD20230301A8V0145AA1L3HAM19031ALVMAN923222Z109AAABCTN', 'PDF417', 150, 12, 0, 0, $style2, 'N');
 
+$txt = "QTY (Q)";
+$pdf->MultiCell(54, 0.3, $txt, 0, 'L', false, 1, 11.4, 26, true, 0, false, false, 0, 'T', false);
 
-$pdf->Cell(0, 0, 'QTY (Q) 432 PCE', 0, 1);
-$pdf->write1DBarcode('Q432', 'C128', '', '', '', 18, 0.4, $style, 'N');
+$html = '<b style="font-size:52px;">54</b>';
+$pdf->SetY(22);
+$pdf->SetX(65);
+$pdf->writeHTML($html, true, false, true, false, '');
+$pdf->MultiCell(54, 0.3, $txt, 0, 'L', false, 1, 11.4, 26, true, 0, false, false, 0, 'T', false);
+$html = '<b style="font-size:14px;">PCE</b>';
+$pdf->SetY(40);
+$pdf->SetX(72);
+$pdf->writeHTML($html, true, false, true, false, '');
+
+
+//$pdf->Cell(0, 0, 'QTY (Q) 432 PCE', 0, 1);
+$pdf->write1DBarcode('Q432', 'C128', '', '', '', 13.5, 0.4, $style, 'N');
+
+$straightLineStyle = array('width' => 0.3, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(0, 0, 0)); 
+$pdf->Line(85, 25, 85, 58, $straightLineStyle); // vertical line
+
+
+$html = '<b style="font-size:9px;">CONTAINER</b>';
+$pdf->SetY(26);
+$pdf->SetX(86);
+$pdf->writeHTML($html, true, false, true, false, '');
+
+$html = '<b style="font-size:18px;">IMC 100</b>';
+$pdf->SetY(29);
+$pdf->SetX(86);
+$pdf->writeHTML($html, true, false, true, false, '');
+
+$html = '<b style="font-size:9px;">GROSS WGT</b>';
+$pdf->SetY(36);
+$pdf->SetX(86);
+$pdf->writeHTML($html, true, false, true, false, '');
+
+$html = '<b style="font-size:18px;">14 KG</b>';
+$pdf->SetY(40);
+$pdf->SetX(86);
+$pdf->writeHTML($html, true, false, true, false, '');
+
+$html = '<b style="font-size:9px;">DATE</b>';
+$pdf->SetY(48);
+$pdf->SetX(86);
+$pdf->writeHTML($html, true, false, true, false, '');
+
+$html = '<b style="font-size:18px;">01MAR2023</b>';
+$pdf->SetY(52);
+$pdf->SetX(86);
+$pdf->writeHTML($html, true, false, true, false, '');
+
+$pdf->writeHTML('<hr style="width:100%;text-align:left;margin-left:0">', true, false, true, false, '');
+
+
 
 $pdf->Ln();
 
