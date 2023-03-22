@@ -100,7 +100,7 @@ $style2 = array(
 // CODE 128 AUTO
 //$pdf->Cell
 
-$txt = "SUPP (V) Plascam";
+$txt = "SUPP (V) Plascam"; // test
 // $pdf->MultiCell()
 $pdf->MultiCell(34, 0.3, $txt, 0, 'L', false, 1, 11.4, 8.5, true, 0, false, false, 0, 'T', false);
 //$pdf->SetY(30);
