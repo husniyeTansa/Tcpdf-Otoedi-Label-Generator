@@ -12,8 +12,8 @@ $channel = $connection->channel();
 
 $callback = function ($msg){
 
-    file_put_contents("C:\\xampp\htdocs\Tcpdf-Otoedi-Label-Generator\data.json", ($msg->body));
-    exec("php C:\\xampp\htdocs\Tcpdf-Otoedi-Label-Generator\index.php");
+    file_put_contents("C:\\xampp\htdocs\Tcpdf-Otoedi-Label-Generator\data2.json", ($msg->body));
+  //  exec("php C:\\xampp\htdocs\Tcpdf-Otoedi-Label-Generator\index.php");
 };
 
 
