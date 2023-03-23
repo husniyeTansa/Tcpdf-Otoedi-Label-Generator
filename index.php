@@ -94,7 +94,8 @@ $outerPackage = ["supplierName" => $supplierName,
                  "customerPlantName" => $customerPlantName,
                  "customerPlantAltCode" => $customerPlantAltCode,
                  "dockCode" => $dockCode,
-                 "engAlert" => $engAlert];
+                 "engAlert" => $engAlert,
+                 "quantityPackage" => $quantityPackage];
 
 
 print_r($totalInner);die;
