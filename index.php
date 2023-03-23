@@ -75,7 +75,26 @@ $consigneeAltIdentifier = $labelCollection->collection[0]->inners[0]->consignee_
 
 $totalInner = $labelCollection->collection[0]->totalInner;
 
-
+$outerPackage = ["supplierName" => $supplierName,
+                 "supplierGSDBCode" => $supplierGSDBCode,
+                 "quantity" => $quantity,
+                 "unitOfMeasure" => $unitOfMeasure,
+                 "container" => $container,
+                 "grossWeight" => floor($grossWeight),
+                 "weight_unit" => $weightUnit,
+                 "date" => $date,
+                 "lotBatch" => $lotBatch,
+                 "shift" => $shift,
+                 "wc" => $wc,
+                 "partNumber" => $partNumber,
+                 "storageLocation" => $storageLocation,
+                 "deliveryDocASNNumber" => $deliveryDocASNNumber,
+                 "descriptionOfPart" => $descriptionOfPart,
+                 "labelNumber" => $labelNumber,
+                 "customerPlantName" => $customerPlantName,
+                 "customerPlantAltCode" => $customerPlantAltCode,
+                 "dockCode" => $dockCode,
+                 "engAlert" => $engAlert];
 
 
 print_r($totalInner);die;
