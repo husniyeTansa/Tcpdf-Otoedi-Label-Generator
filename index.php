@@ -2,7 +2,7 @@
 
 require_once 'create_asn.php';
 
-$jsonFileName = "C:\\xampp\htdocs\Tcpdf-Otoedi-Label-Generator\data.json";
+$jsonFileName = "C:\\xampp\htdocs\Tcpdf-Otoedi-Label-Generator\data2.json";
 
 // set main parameter
 $labelCollection = json_decode(file_get_contents($jsonFileName));
@@ -70,6 +70,41 @@ $consigneeAltIdentifier = $labelCollection->collection[0]->inners[0]->consignee_
 
 $totalInner = $labelCollection->collection[0]->totalInner;
 
+$outerPackage = [
+    "supplierName" => $supplierNameOuter,
+    "supplierGSDBCode" => $supplierGSDBCodeOuter,
+    "quantity" => $quantityOuter,
+    "unitOfMeasure" => $unitOfMeasureOuter,
+    "container" => $containerOuter,
+    "grossWeight" => floor($grossWeightOuter),
+    "weight_unit" => $weightUnit,
+    "date" => $dateOuter,
+    "lotBatch" => $lotBatchOuter,
+    "shift" => $shiftOuter,
+    "wc" => $wcOuter,
+    "partNumber" => $partNumberOuter,
+    "storageLocation" => $storageLocationOuter,
+    "deliveryDocASNNumber" => $deliveryDocASNNumberOuter,
+    "descriptionOfPart" => $descriptionOfPartOuter,
+    "labelNumber" => $labelNumberOuter,
+    "customerPlantName" => $customerPlantNameOuter,
+    "customerPlantAltCode" => $customerPlantAltCodeOuter,
+    "dockCode" => $dockCodeOuter,
+    "engAlert" => $engAlertOuter,
+    "quantityPackage" => $quantityPackageOuter,
+    "typeAsn" => "OuterASN",
+    "ftime" => $timestamp,
+    "despatch_package_id" => $despatchPackageIdOuter,
+    "fk_despatch_package_id" => $fkDespatchPackageIdOuter,
+    "despatch_id" => $despatchId
+];
+
+createASN($outerPackage);
+
+if(!isset($labelCollection->collection[1])){
+    return;
+}
+
 // inner package
 $supplierNameInner = $labelCollection->collection[1]->supplierName;
 $supplierGSDBCodeInner = $labelCollection->collection[1]->supplierGSDBCode;
@@ -111,37 +146,6 @@ $labelNumberInner = $labelCollection->collection[1]->labelNumber;
 $labelTypeInner = $labelCollection->collection[1]->labelNumber;
 $totalInnerInner = $labelCollection->collection[1]->totalInner;
 $companyPrefixInner = $labelCollection->collection[1]->companyPrefix;
-
-$outerPackage = [
-    "supplierName" => $supplierNameOuter,
-    "supplierGSDBCode" => $supplierGSDBCodeOuter,
-    "quantity" => $quantityOuter,
-    "unitOfMeasure" => $unitOfMeasureOuter,
-    "container" => $containerOuter,
-    "grossWeight" => floor($grossWeightOuter),
-    "weight_unit" => $weightUnit,
-    "date" => $dateOuter,
-    "lotBatch" => $lotBatchOuter,
-    "shift" => $shiftOuter,
-    "wc" => $wcOuter,
-    "partNumber" => $partNumberOuter,
-    "storageLocation" => $storageLocationOuter,
-    "deliveryDocASNNumber" => $deliveryDocASNNumberOuter,
-    "descriptionOfPart" => $descriptionOfPartOuter,
-    "labelNumber" => $labelNumberOuter,
-    "customerPlantName" => $customerPlantNameOuter,
-    "customerPlantAltCode" => $customerPlantAltCodeOuter,
-    "dockCode" => $dockCodeOuter,
-    "engAlert" => $engAlertOuter,
-    "quantityPackage" => $quantityPackageOuter,
-    "typeAsn" => "OuterASN",
-    "ftime" => $timestamp,
-    "despatch_package_id" => $despatchPackageIdOuter,
-    "fk_despatch_package_id" => $fkDespatchPackageIdOuter,
-    "despatch_id" => $despatchId
-];
-
-createASN($outerPackage);
 
 $innerPackage = [
     "supplierName" => $supplierNameInner,
