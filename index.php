@@ -2,7 +2,7 @@
 
 require_once 'create_asn.php';
 
-$jsonFileName = "C:\\xampp\htdocs\Tcpdf-Otoedi-Label-Generator\data.json";
+$jsonFileName = "C:\\xampp\htdocs\Tcpdf-Otoedi-Label-Generator\data2.json";
 
 // set main parameter
 $labelCollection = json_decode(file_get_contents($jsonFileName));
@@ -172,4 +172,4 @@ $innerPackage = [
     "despatch_id" => $despatchId
 ];
 
-createASN($innerPackage);
+ createASN($innerPackage);
