@@ -141,6 +141,38 @@ function createOuterASN($arrayAsnInfo)
         $pdf->SetX(86);
         $pdf->writeHTML($html, true, false, true, false, '');
 
+
+
+        $html = '<b style="font-size:9px; color:rgb(152,152,152);">LOT / BATCH NO ' . $arrayAsnInfo['engAlert'] . '</b>';
+        $pdf->SetY(36 + $def_loc_y);
+        $pdf->SetX(129);
+        $pdf->writeHTML($html, true, false, true, false, '');
+
+        $html = '<b style="font-size:18px; color:rgb(152,152,152);">' . $arrayAsnInfo['lotBatch'] . '</b>';
+        $pdf->SetY(40 + $def_loc_y);
+        $pdf->SetX(129);
+        $pdf->writeHTML($html, true, false, true, false, '');
+
+        $html = '<b style="font-size:9px; color:rgb(152,152,152);">SHIFT</b>';
+        $pdf->SetY(48 + $def_loc_y);
+        $pdf->SetX(129);
+        $pdf->writeHTML($html, true, false, true, false, '');
+
+        $html = '<b style="font-size:9px; color:rgb(152,152,152);">' . $arrayAsnInfo['shift'] . '</b>';
+        $pdf->SetY(53 + $def_loc_y);
+        $pdf->SetX(129);
+        $pdf->writeHTML($html, true, false, true, false, '');
+
+        $html = '<b style="font-size:9px; color:rgb(152,152,152);">W/C</b>';
+        $pdf->SetY(48 + $def_loc_y);
+        $pdf->SetX(144);
+        $pdf->writeHTML($html, true, false, true, false, '');
+
+        $html = '<b style="font-size:9px; color:rgb(152,152,152);">' . $arrayAsnInfo['wc'] . '</b>';
+        $pdf->SetY(53 + $def_loc_y);
+        $pdf->SetX(144);
+        $pdf->writeHTML($html, true, false, true, false, '');
+
         $html = '<b style="font-size:9px;">DATE</b>';
         $pdf->SetY(48 + $def_loc_y);
         $pdf->SetX(86);
@@ -150,6 +182,7 @@ function createOuterASN($arrayAsnInfo)
         $pdf->SetY(52 + $def_loc_y);
         $pdf->SetX(86);
         $pdf->writeHTML($html, true, false, true, false, '');
+
 
         $pdf->writeHTML('<hr style="width:100%;text-align:left;margin-left:0">', true, false, true, false, '');
 
