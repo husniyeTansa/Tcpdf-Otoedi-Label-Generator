@@ -3,7 +3,7 @@
 
 require_once('TCPDF-main/tcpdf.php');
 
-function createOuterASN($arrayAsnInfo)
+function createASN($arrayAsnInfo)
 {
 
     ob_start();
@@ -249,21 +249,18 @@ function createOuterASN($arrayAsnInfo)
         $pdf->writeHTML($html, true, false, true, false, '');
     }
 
-    $pdf->Output(__DIR__ . '/test.pdf', 'I');
-    //Close and output PDF document
-    //$pdf->Output(__DIR__ . '/test.pdf', 'F');
-    //downloadFile("test.pdf");
+    // set array for fileName
+    $filename = __DIR__ . '/outbox/'
+                .preg_replace('/\s+/', '', $arrayAsnInfo['deliveryDocASNNumber'])
+                .'.'.preg_replace('/\s+/', '', $arrayAsnInfo['partNumber'])
+                .'.'.$arrayAsnInfo['despatch_id']
+                .'.0'
+                .'.'.$arrayAsnInfo['despatch_package_id']
+                .'.'.$arrayAsnInfo['lotBatch']
+                .'.'.str_replace([" ", ":", "-"], ["", "", ""], $arrayAsnInfo['ftime']) . '.pdf'; 
+
+    // dowland pdf asn
+    $pdf->Output($filename, 'F');
+
     ob_end_flush();
-}
-
-
-
-function downloadFile($fileName)
-{
-
-    $fileName = __DIR__ . "/$fileName";
-    header('Content-Type: application/octet-stream');
-    header("Content-Transfer-Encoding: Binary");
-    header("Content-disposition: attachment; filename=\"" . basename($fileName) . "\"");
-    readfile($fileName);
 }
