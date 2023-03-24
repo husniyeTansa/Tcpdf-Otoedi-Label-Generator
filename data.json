@@ -3,8 +3,8 @@
     "collection": [
         {
             "supplierName": "Plascam",
-            "supplierGSDBCode": "DP9JA",
-            "quantity": 43,
+            "supplierGSDBCode": "DP9JAA",
+            "quantity": 12,
             "quantityPackage": 1,
             "unitOfMeasure": "PCE",
             "container": "CTN",
@@ -104,7 +104,7 @@
             "supplierGSDBCode": "DP9JA",
             "quantity": 54,
             "quantityPackage": 8,
-            "unitOfMeasure": "PCE",
+            "unitOfMeasure": "PCEgfgfgfgfg",
             "container": "IMC100",
             "grossWeight": "13.58",
             "date": "01MAR2023",

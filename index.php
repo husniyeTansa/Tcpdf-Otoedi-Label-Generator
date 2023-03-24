@@ -97,7 +97,7 @@ $outerPackage = ["supplierName" => $supplierName,
                  "engAlert" => $engAlert,
                  "quantityPackage" => $quantityPackage];
 
-createASN($outerPackage);
+createOuterASN($outerPackage);
                  
 //print_r($totalInner);die;
 
