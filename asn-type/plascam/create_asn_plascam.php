@@ -29,7 +29,6 @@ function createASN($arrayAsnInfo)
     $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
 
     // set margins
-    $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
     $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
     $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
 
@@ -97,7 +96,7 @@ function createASN($arrayAsnInfo)
         $pdf->write1DBarcode('V' . $arrayAsnInfo['supplierGSDBCode'], 'C128', 11.4, 11.5 + $def_loc_y, 53.9, 13.5, 0.4, $style, 'N'); // 9.5 * 1.41 = 13.5
 
         $pdf->writeHTML('<hr style="width:75%;text-align:left;margin-left:0">', true, false, true, false, '');
-        $pdf->write2DBarcode('[)>A06AP  NT1B 17A950AB5YZ9  AQ432AVDP9JAAD20230301A8V0145AA1L3HAM19031ALVMAN923222Z109AAABCTN', 'PDF417', 150, 12 + $def_loc_y, 0, 0, $style2, 'N');
+        $pdf->write2DBarcode('A06AP  NT1B 17A950AB5YZ9  AQ432AVDP9JAAD20230301A8V0145AA1L3HAM19031ALVMAN923222Z109AAABCTN', 'PDF417', 150, 12 + $def_loc_y, 0, 0, $style2, 'N');
 
         $html = '<b style="font-size:9px;">QTY (Q)</b>';
         $pdf->SetY(26 + $def_loc_y);
@@ -279,8 +278,10 @@ function createASN($arrayAsnInfo)
         $pdf->writeHTML($html, true, false, true, false, '');
     }
 
+    $pdf->Output("test.pdf", 'I');
+
     // set array for fileName
-    $filename = dirname(dirname(__DIR__)) . '/outbox/plascam/'
+    /*$filename = dirname(dirname(__DIR__)) . '/outbox/plascam/'
                 .preg_replace('/\s+/', '', $arrayAsnInfo['deliveryDocASNNumber'])
                 .'.'.preg_replace('/\s+/', '', $arrayAsnInfo['partNumber'])
                 .'.'.$arrayAsnInfo['despatch_id']
@@ -290,7 +291,7 @@ function createASN($arrayAsnInfo)
                 .'.'.str_replace([" ", ":", "-"], ["", "", ""], $arrayAsnInfo['ftime']) . '.pdf'; 
 
     // dowland pdf asn
-    $pdf->Output($filename, 'F');
+    $pdf->Output($filename, 'F');*/
 
     ob_end_flush();
 }

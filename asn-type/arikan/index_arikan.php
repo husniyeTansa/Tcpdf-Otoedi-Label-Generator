@@ -2,7 +2,7 @@
 
 require_once __DIR__.'/create_asn_arikan.php';
 
-$jsonFileName = dirname(dirname(__DIR__))."/data1.json";
+$jsonFileName = dirname(dirname(__DIR__))."/data/data1.json";
 
 // set main parameter
 $labelCollection = json_decode(file_get_contents($jsonFileName));
@@ -92,6 +92,7 @@ $outerPackage = [
     "customerPlantAltCode" => $customerPlantAltCodeOuter,
     "dockCode" => $dockCodeOuter,
     "engAlert" => $engAlertOuter,
+    "serialNumber" => $serialNumberOuter,
     "quantityPackage" => $quantityPackageOuter,
     "typeAsn" => "OuterASN",
     "ftime" => $timestamp,
@@ -160,6 +161,7 @@ $innerPackage = [
     "lotBatch" => $lotBatchInner,
     "shift" => $shiftInner,
     "wc" => $wcInner,
+    "serialNumber" => $serialNumberInner,
     "partNumber" => $partNumberInner,
     "storageLocation" => $storageLocationInner,
     "deliveryDocASNNumber" => $deliveryDocASNNumberInner,

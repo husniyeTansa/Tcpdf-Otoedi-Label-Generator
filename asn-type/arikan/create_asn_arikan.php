@@ -28,7 +28,6 @@ function createASN($arrayAsnInfo)
     $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
 
     // set margins
-    $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
     $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
     $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
 
@@ -87,12 +86,12 @@ function createASN($arrayAsnInfo)
         $pdf->SetX(2);
         $pdf->writeHTML($html, true, false, true, false, '');
 
-        $html = '<span style="font-size:22px;">undefined</span>';
+        $html = '<span style="font-size:22px;">'. $arrayAsnInfo['supplierGsdb'] .'</span>';
         $pdf->SetY(6 + $def_loc_y);
         $pdf->SetX(2);
         $pdf->writeHTML($html, true, false, true, false, '');
 
-        $html = '<span style="font-size:22px;">320.1012</span>';
+        $html = '<span style="font-size:22px;">'. $arrayAsnInfo['supplierName'] .'</span>';
         $pdf->SetY(4 + $def_loc_y);
         $pdf->SetX(100);
         $pdf->writeHTML($html, true, false, true, false, '');
@@ -104,7 +103,7 @@ function createASN($arrayAsnInfo)
         $pdf->SetX(2);
         $pdf->writeHTML($html, true, false, true, false, '');
 
-        $html = '<span style="font-size:22px;">6501801770</span>';
+        $html = '<span style="font-size:22px;">'. $arrayAsnInfo['partNumber'] .'</span>';
         $pdf->SetY(26 + $def_loc_y);
         $pdf->SetX(2);
         $pdf->writeHTML($html, true, false, true, false, '');
@@ -114,7 +113,7 @@ function createASN($arrayAsnInfo)
         $pdf->SetX(108);
         $pdf->writeHTML($html, true, false, true, false, '');
 
-        $html = '<span style="font-size:22px;">1</span>';
+        $html = '<span style="font-size:22px;">'. $arrayAsnInfo['quantity'] .'</span>';
         $pdf->SetY(25 + $def_loc_y);
         $pdf->SetX(109);
         $pdf->writeHTML($html, true, false, true, false, '');
@@ -126,14 +125,14 @@ function createASN($arrayAsnInfo)
         $pdf->SetX(2);
         $pdf->writeHTML($html, true, false, true, false, '');
 
-        $html = '<b style="font-size:22px;">6501801770</b>';
+        $html = '<b style="font-size:22px;">'. $arrayAsnInfo['descriptionOfPart'] .'</b>';
         $pdf->SetY(43 + $def_loc_y);
         $pdf->SetX(2);
         $pdf->writeHTML($html, true, false, true, false, '');
 
         $pdf->Line(140, 44 + $def_loc_y, 210, 44 + $def_loc_y, $straightLineStyle); // horizontal 4 left row
 
-        $html = '<b style="font-size:17px;">undefined</b>';
+        $html = '<b style="font-size:17px;">'. $arrayAsnInfo['uom'] .'</b>';
         $pdf->SetY(28 + $def_loc_y);
         $pdf->SetX(142);
         $pdf->writeHTML($html, true, false, true, false, '');
@@ -143,7 +142,12 @@ function createASN($arrayAsnInfo)
         $pdf->SetX(142);
         $pdf->writeHTML($html, true, false, true, false, '');
 
-        $pdf->write2DBarcode('SDJKFSLSJKFL2345234SFKDFLSDFDGŞFKŞLFSFJSFK', 'QRCODE,Q', 155, 42 + $def_loc_y, 30, 30, $style, 'N');
+        $arrayAsnInfo['uom'] = "undefined";
+        $arrayAsnInfo['transportIdentifier'] = "34glsn44";
+        $text_qrcode = $arrayAsnInfo['supplierGSDBCode'] . "~" . $arrayAsnInfo['supplierName'] . "~" . $arrayAsnInfo['partNumber'] . "~" . $arrayAsnInfo['quantity'] . "~" . $arrayAsnInfo['uom'] . "~" . $arrayAsnInfo['descriptionOfPart']
+                        . "~" . $arrayAsnInfo['transportIdentifier'] . "~" . $arrayAsnInfo['date'] . "~" . $arrayAsnInfo['deliveryDocASNNumber'] . "~" . $arrayAsnInfo['serialNumber'];
+
+        $pdf->write2DBarcode($text_qrcode, 'QRCODE,Q', 155, 43 + $def_loc_y, 30, 30, $style, 'N');
 
         $pdf->Line(0, 54 + $def_loc_y, 140, 54 + $def_loc_y, $straightLineStyle); // horizontal 5 left row
 
@@ -152,19 +156,19 @@ function createASN($arrayAsnInfo)
         $pdf->SetX(2);
         $pdf->writeHTML($html, true, false, true, false, '');
 
-        $html = '<span style="font-size:22px;">34glsn44</span>';
+        $html = '<span style="font-size:22px;">'. $arrayAsnInfo['transportIdentifier'] .'</span>';
         $pdf->SetY(61 + $def_loc_y);
         $pdf->SetX(2);
         $pdf->writeHTML($html, true, false, true, false, '');
 
         $html = '<b style="font-size:13px;">DATE</b>';
         $pdf->SetY(56 + $def_loc_y);
-        $pdf->SetX(50);
+        $pdf->SetX(47);
         $pdf->writeHTML($html, true, false, true, false, '');
 
-        $html = '<span style="font-size:22px;">29.03.2023</span>';
+        $html = '<span style="font-size:22px;">'. $arrayAsnInfo['date'] .'</span>';
         $pdf->SetY(61 + $def_loc_y);
-        $pdf->SetX(50);
+        $pdf->SetX(47);
         $pdf->writeHTML($html, true, false, true, false, '');
 
         $html = '<b style="font-size:13px;">ASN NUMBER</b>';
@@ -172,7 +176,7 @@ function createASN($arrayAsnInfo)
         $pdf->SetX(90);
         $pdf->writeHTML($html, true, false, true, false, '');
 
-        $html = '<span style="font-size:22px;">443423</span>';
+        $html = '<span style="font-size:22px;">'. $arrayAsnInfo['deliveryDocASNNumber'] .'</span>';
         $pdf->SetY(61 + $def_loc_y);
         $pdf->SetX(90);
         $pdf->writeHTML($html, true, false, true, false, '');
@@ -181,10 +185,10 @@ function createASN($arrayAsnInfo)
     }
 
     //Close and output PDF document
-    //$pdf->Output('example_027.pdf', 'I');
+    $pdf->Output('example_027.pdf', 'I');
 
     // set array for fileName
-    $filename = dirname(dirname(__DIR__)) . '/outbox/arikan/'
+    /*$filename = dirname(dirname(__DIR__)) . '/outbox/arikan/'
                 .preg_replace('/\s+/', '', $arrayAsnInfo['deliveryDocASNNumber'])
                 .'.'.preg_replace('/\s+/', '', $arrayAsnInfo['partNumber'])
                 .'.'.$arrayAsnInfo['despatch_id']
@@ -194,7 +198,7 @@ function createASN($arrayAsnInfo)
                 .'.'.str_replace([" ", ":", "-"], ["", "", ""], $arrayAsnInfo['ftime']) . '.pdf';
 
     // dowland pdf asn
-    $pdf->Output($filename, 'F');
+    $pdf->Output($filename, 'F');*/
 
     ob_end_flush();
 }

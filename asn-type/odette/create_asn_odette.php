@@ -28,7 +28,6 @@ function createASN($arrayAsnInfo)
     $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
 
     // set margins
-    $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
     $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
     $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
 
@@ -79,12 +78,12 @@ function createASN($arrayAsnInfo)
         $pdf->SetX(5.4);
         $pdf->writeHTML($html, true, false, true, false, '');
 
-        $html = '<b style="font-size:12px;">JLR</b>';
+        $html = '<b style="font-size:12px;">'. $arrayAsnInfo['receiverName'] .'</b>';
         $pdf->SetY(8.4 + $def_loc_y);
         $pdf->SetX(7);
         $pdf->writeHTML($html, true, false, true, false, '');
 
-        $html = '<b style="font-size:12px;">JH Halewood</b>';
+        $html = '<b style="font-size:12px;">'. $arrayAsnInfo['customerPlantCode'] .' ' . $arrayAsnInfo['customerPlantName'] .'</b>';
         $pdf->SetY(12.5 + $def_loc_y);
         $pdf->SetX(7);
         $pdf->writeHTML($html, true, false, true, false, '');
@@ -98,29 +97,29 @@ function createASN($arrayAsnInfo)
         $pdf->SetX(109.4);
         $pdf->writeHTML($html, true, false, true, false, '');
 
-        $html = '<b style="font-size:48px;font-weight:400">ZH</b>';
+        $html = '<span style="font-size:48px;font-weight:400">'. $arrayAsnInfo['dockCode'] .'</span>';
         $pdf->SetY(3 + $def_loc_y);
         $pdf->SetX(111);
         $pdf->writeHTML($html, true, false, true, false, '');
 
-        $html = '<b style="font-size:8px;">ADVICE NOTE NO</b>';
+        $html = '<b style="font-size:8px;">'. $arrayAsnInfo['customerAddrLine1'] .'</b>';
         $pdf->SetY(21 + $def_loc_y);
         $pdf->SetX(5.4);
         $pdf->writeHTML($html, true, false, true, false, '');
 
-        $html = '<b style="font-size:20px;">923590</b>';
+        $html = '<b style="font-size:20px;">'. $arrayAsnInfo['deliveryDocASNNumber'] .'</b>';
         $pdf->SetY(23 + $def_loc_y);
         $pdf->SetX(15);
         $pdf->writeHTML($html, true, false, true, false, '');
 
-        $pdf->write1DBarcode('S923590', 'C128', 5, 29 + $def_loc_y, '', 18, 0.5, $style, 'N');
+        $pdf->write1DBarcode('S'. $arrayAsnInfo['deliveryDocASNNumber'], 'C128', 5, 29 + $def_loc_y, '', 18, 0.5, $style, 'N');
 
         $html = '<b style="font-size:8px;">SUPPLIER ADDRESS</b>';
         $pdf->SetY(21 + $def_loc_y);
         $pdf->SetX(109.4);
         $pdf->writeHTML($html, true, false, true, false, '');
 
-        $html = '<b style="font-size:15px;">Pelitli Mah, Maden Cad. No:22</b>'; // Gebze/Kocaeli
+        $html = '<span style="font-size:15px;font-weight:500;">'. $arrayAsnInfo['supplierAddr'] .'</span>';
         $pdf->SetY(25 + $def_loc_y);
         $pdf->SetX(112);
         $pdf->writeHTML($html, true, true, true, false, '');
@@ -132,7 +131,7 @@ function createASN($arrayAsnInfo)
         $pdf->SetX(109.4);
         $pdf->writeHTML($html, true, false, true, false, '');
 
-        $html = '<b style="font-size:22px;">7.50</b>';
+        $html = '<b style="font-size:22px;">'. $arrayAsnInfo['netWeight'] .'</b>';
         $pdf->SetY(37 + $def_loc_y);
         $pdf->SetX(111);
         $pdf->writeHTML($html, true, true, true, false, '');
@@ -144,7 +143,7 @@ function createASN($arrayAsnInfo)
         $pdf->SetX(144.4);
         $pdf->writeHTML($html, true, false, true, false, '');
 
-        $html = '<b style="font-size:22px;">33.20</b>';
+        $html = '<b style="font-size:22px;">'. $arrayAsnInfo['grossWeight'] .'</b>';
         $pdf->SetY(37 + $def_loc_y);
         $pdf->SetX(146);
         $pdf->writeHTML($html, true, true, true, false, '');
@@ -156,7 +155,7 @@ function createASN($arrayAsnInfo)
         $pdf->SetX(179.4);
         $pdf->writeHTML($html, true, false, true, false, '');
 
-        $html = '<b style="font-size:22px;">10</b>';
+        $html = '<b style="font-size:22px;">'. $arrayAsnInfo['totalInner'] .'</b>';
         $pdf->SetY(37 + $def_loc_y);
         $pdf->SetX(181);
         $pdf->writeHTML($html, true, true, true, false, '');
@@ -168,12 +167,12 @@ function createASN($arrayAsnInfo)
         $pdf->SetX(5.4);
         $pdf->writeHTML($html, true, false, true, false, '');
 
-        $html = '<p style="font-size:45px;">BJ32 423A74AB</p>';
+        $html = '<p style="font-size:45px;">'. $arrayAsnInfo['partNumber'] .'</p>';
         $pdf->SetY(47 + $def_loc_y);
         $pdf->SetX(4);
         $pdf->writeHTML($html, true, false, true, false, '');
 
-        $pdf->write1DBarcode('SBJ32 423A74AB', 'C128', 5, 58 + $def_loc_y, '', 19, 0.6, $style, 'N');
+        $pdf->write1DBarcode('S'. $arrayAsnInfo['partNumber'], 'C128', 5, 58 + $def_loc_y, '', 19, 0.6, $style, 'N');
 
         $pdf->Line(0, 75 + $def_loc_y, 210, 75 + $def_loc_y, $straightLineStyle); // horizontal 4 all row
 
@@ -182,12 +181,12 @@ function createASN($arrayAsnInfo)
         $pdf->SetX(5.4);
         $pdf->writeHTML($html, true, false, true, false, '');
 
-        $html = '<p style="font-size:47px;">1500</p>';
+        $html = '<p style="font-size:47px;">'. $arrayAsnInfo['quantity'] .'</p>';
         $pdf->SetY(77 + $def_loc_y);
         $pdf->SetX(30);
         $pdf->writeHTML($html, true, false, true, false, '');
 
-        $pdf->write1DBarcode('1500', 'C128', 7, 88 + $def_loc_y, '', 20, 0.7, $style, 'N');
+        $pdf->write1DBarcode($arrayAsnInfo['quantity'], 'C128', 7, 88 + $def_loc_y, '', 20, 0.7, $style, 'N');
 
         $pdf->Line(105, 75 + $def_loc_y, 105, 145 + $def_loc_y, $straightLineStyle); // vertical line 4
 
@@ -196,7 +195,7 @@ function createASN($arrayAsnInfo)
         $pdf->SetX(109.4);
         $pdf->writeHTML($html, true, false, true, false, '');
 
-        $html = '<b style="font-size:20px;">BJ32 423A74AB</b>';
+        $html = '<b style="font-size:20px;">'. $arrayAsnInfo['descriptionOfPart'] .'</b>';
         $pdf->SetY(79 + $def_loc_y);
         $pdf->SetX(111);
         $pdf->writeHTML($html, true, true, true, false, '');
@@ -208,12 +207,12 @@ function createASN($arrayAsnInfo)
         $pdf->SetX(109.4);
         $pdf->writeHTML($html, true, false, true, false, '');
 
-        $html = '<b style="font-size:22px;">BJ32 423A74AB</b>';
+        $html = '<b style="font-size:22px;">'. $arrayAsnInfo['partNumber'] .'</b>';
         $pdf->SetY(90 + $def_loc_y);
         $pdf->SetX(115);
         $pdf->writeHTML($html, true, true, true, false, '');
 
-        $pdf->write1DBarcode('BJ32 423A74AB', 'C128', 112, 96 + $def_loc_y, '', 18, 0.4, $style, 'N');
+        $pdf->write1DBarcode($arrayAsnInfo['partNumber'], 'C128', 112, 96 + $def_loc_y, '', 18, 0.4, $style, 'N');
 
         $pdf->Line(0, 105 + $def_loc_y, 105, 105 + $def_loc_y, $straightLineStyle); // horizontal 6 left row
 
@@ -222,12 +221,12 @@ function createASN($arrayAsnInfo)
         $pdf->SetX(5.4);
         $pdf->writeHTML($html, true, false, true, false, '');
 
-        $html = '<b style="font-size:16px;">DP9JA</b>';
+        $html = '<b style="font-size:16px;">'. $arrayAsnInfo['supplierGsdb'] .'</b>';
         $pdf->SetY(106 + $def_loc_y);
         $pdf->SetX(25);
         $pdf->writeHTML($html, true, false, true, false, '');
 
-        $pdf->write1DBarcode('DP9JA', 'C128', 7, 110 + $def_loc_y, '', 17, 0.5, $style, 'N');
+        $pdf->write1DBarcode($arrayAsnInfo['supplierGsdb'], 'C128', 7, 110 + $def_loc_y, '', 17, 0.5, $style, 'N');
 
         $pdf->Line(105, 115 + $def_loc_y, 210, 115 + $def_loc_y, $straightLineStyle); // horizontal 6 right row
 
@@ -236,7 +235,7 @@ function createASN($arrayAsnInfo)
         $pdf->SetX(109.4);
         $pdf->writeHTML($html, true, false, true, false, '');
 
-        $html = '<b style="font-size:20px;">D23.03.22</b>';
+        $html = '<b style="font-size:20px;">'. $arrayAsnInfo['date'] .'</b>';
         $pdf->SetY(119 + $def_loc_y);
         $pdf->SetX(111);
         $pdf->writeHTML($html, true, true, true, false, '');
@@ -248,6 +247,11 @@ function createASN($arrayAsnInfo)
         $pdf->SetX(147);
         $pdf->writeHTML($html, true, false, true, false, '');
 
+        $html = '<b style="font-size:20px;">'. $arrayAsnInfo['engAlert'] .'</b>';
+        $pdf->SetY(119 + $def_loc_y);
+        $pdf->SetX(148);
+        $pdf->writeHTML($html, true, true, true, false, '');
+
         $pdf->Line(0, 126 + $def_loc_y, 210, 126 + $def_loc_y, $straightLineStyle); // horizontal 7 all row
 
         $html = '<b style="font-size:8px;">SERIAL NUMBER</b>';
@@ -255,7 +259,7 @@ function createASN($arrayAsnInfo)
         $pdf->SetX(5.4);
         $pdf->writeHTML($html, true, false, true, false, '');
 
-        $html = '<b style="font-size:18px;">086839857000237305</b>';
+        $html = '<b style="font-size:18px;">'. $arrayAsnInfo['serialNumber'] .'</b>';
         $pdf->SetY(126 + $def_loc_y);
         $pdf->SetX(28);
         $pdf->writeHTML($html, true, false, true, false, '');
@@ -267,7 +271,7 @@ function createASN($arrayAsnInfo)
         $pdf->SetX(109.4);
         $pdf->writeHTML($html, true, false, true, false, '');
 
-        $html = '<b style="font-size:18px;">230316001</b>';
+        $html = '<b style="font-size:18px;">'. $arrayAsnInfo['lotBatch'] .'</b>';
         $pdf->SetY(127 + $def_loc_y);
         $pdf->SetX(135);
         $pdf->writeHTML($html, true, true, true, false, '');
@@ -277,10 +281,10 @@ function createASN($arrayAsnInfo)
     }
 
     //Close and output PDF document
-    //$pdf->Output('example_027.pdf', 'I');
+    $pdf->Output('example_027.pdf', 'I');
 
     // set array for fileName
-    $filename = dirname(dirname(__DIR__)) . '/outbox/odette/'
+    /*$filename = dirname(dirname(__DIR__)) . '/outbox/odette/'
                 .preg_replace('/\s+/', '', $arrayAsnInfo['deliveryDocASNNumber'])
                 .'.'.preg_replace('/\s+/', '', $arrayAsnInfo['partNumber'])
                 .'.'.$arrayAsnInfo['despatch_id']
@@ -290,7 +294,7 @@ function createASN($arrayAsnInfo)
                 .'.'.str_replace([" ", ":", "-"], ["", "", ""], $arrayAsnInfo['ftime']) . '.pdf';
 
     // dowland pdf asn
-    $pdf->Output($filename, 'F');
+    $pdf->Output($filename, 'F');*/
 
     ob_end_flush();
 }

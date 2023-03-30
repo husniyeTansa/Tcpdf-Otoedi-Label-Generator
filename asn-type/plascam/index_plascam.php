@@ -2,7 +2,7 @@
 
 require_once __DIR__.'/create_asn_plascam.php';
 
-$jsonFileName = dirname(dirname(__DIR__))."/data1.json";
+$jsonFileName = dirname(dirname(__DIR__))."/data/data1.json";
 
 // set main parameter
 $labelCollection = json_decode(file_get_contents($jsonFileName));

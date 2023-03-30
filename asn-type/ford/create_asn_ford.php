@@ -99,7 +99,7 @@ function createASN($arrayAsnInfo)
         $pdf->writeHTML('<hr style="width:75%;text-align:left;margin-left:0">', true, false, true, false, '');
         $pdf->write2DBarcode('[)>A06AP  NT1B 17A950AB5YZ9  AQ432AVDP9JAAD20230301A8V0145AA1L3HAM19031ALVMAN923222Z109AAABCTN', 'PDF417', 150, 12 + $def_loc_y, 0, 0, $style2, 'N');
 
-        $html = '<b style="font-size:9px;">QTY (Q)</b>';
+        $html = '<b style="font-size:9px;">QTY <br> (Q)</b>';
         $pdf->SetY(26 + $def_loc_y);
         $pdf->SetX(11.4);
         $pdf->writeHTML($html, true, false, true, false, '');
@@ -188,7 +188,7 @@ function createASN($arrayAsnInfo)
         $pdf->SetX(25);
         $pdf->writeHTML($html, true, false, true, false, '');
 
-        $html = '<b style="font-size:9px;">PART (P)</b>';
+        $html = '<b style="font-size:9px;">PART <br> (P)</b>';
         $pdf->SetY(80 + $def_loc_y);
         $pdf->SetX(11.4);
         $pdf->writeHTML($html, true, false, true, false, '');
@@ -279,8 +279,9 @@ function createASN($arrayAsnInfo)
         $pdf->writeHTML($html, true, false, true, false, '');
     }
 
+    $pdf->Output("deneme.pdf", 'I');
     // set array for fileName
-    $filename = dirname(dirname(__DIR__)) . '/outbox/ford/'
+    /*$filename = dirname(dirname(__DIR__)) . '/outbox/ford/'
                 .preg_replace('/\s+/', '', $arrayAsnInfo['deliveryDocASNNumber'])
                 .'.'.preg_replace('/\s+/', '', $arrayAsnInfo['partNumber'])
                 .'.'.$arrayAsnInfo['despatch_id']
@@ -290,7 +291,7 @@ function createASN($arrayAsnInfo)
                 .'.'.str_replace([" ", ":", "-"], ["", "", ""], $arrayAsnInfo['ftime']) . '.pdf'; 
 
     // dowland pdf asn
-    $pdf->Output($filename, 'F');
+    $pdf->Output($filename, 'F');*/
 
     ob_end_flush();
 }
