@@ -1,7 +1,7 @@
 
 <?php
 
-require_once('TCPDF-main/tcpdf.php');
+require_once(dirname(dirname(__DIR__)).'/TCPDF-main/tcpdf.php');
 
 function createASN($arrayAsnInfo)
 {
@@ -141,8 +141,6 @@ function createASN($arrayAsnInfo)
         $pdf->SetX(86);
         $pdf->writeHTML($html, true, false, true, false, '');
 
-
-
         $html = '<b style="font-size:9px; color:rgb(152,152,152);">LOT / BATCH NO ' . $arrayAsnInfo['engAlert'] . '</b>';
         $pdf->SetY(36 + $def_loc_y);
         $pdf->SetX(129);
@@ -182,7 +180,6 @@ function createASN($arrayAsnInfo)
         $pdf->SetY(52 + $def_loc_y);
         $pdf->SetX(86);
         $pdf->writeHTML($html, true, false, true, false, '');
-
 
         $pdf->writeHTML('<hr style="width:100%;text-align:left;margin-left:0">', true, false, true, false, '');
 
@@ -283,7 +280,7 @@ function createASN($arrayAsnInfo)
     }
 
     // set array for fileName
-    $filename = __DIR__ . '/outbox/'
+    $filename = dirname(dirname(__DIR__)) . '/outbox/plascam/'
                 .preg_replace('/\s+/', '', $arrayAsnInfo['deliveryDocASNNumber'])
                 .'.'.preg_replace('/\s+/', '', $arrayAsnInfo['partNumber'])
                 .'.'.$arrayAsnInfo['despatch_id']
