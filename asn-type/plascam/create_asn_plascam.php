@@ -44,10 +44,16 @@ function createASN($arrayAsnInfo)
     // set font
     $pdf->SetFont('helvetica', '', 11);
 
+    $labelNo = $arrayAsnInfo['labelNumber'] * 10 + 1;
     $quantity_package = $arrayAsnInfo['quantityPackage'];
+    $year = intval(substr($arrayAsnInfo['dateYYMMDD'], 0, 4)) % 100;
+    $month = substr($arrayAsnInfo['dateYYMMDD'], 4, 2);
+    $day = substr($arrayAsnInfo['dateYYMMDD'], 6, 2);
+    $dateYYMMDD = strval($year) . "." . $month . "." . $day; 
+
     for ($i = 0; $i < $quantity_package; $i++) {
 
-        $def_loc_y = 0;
+        $def_loc_y = 0; 
 
         if ($i % 2 != 0) {
             $def_loc_y = 145;
@@ -72,16 +78,6 @@ function createASN($arrayAsnInfo)
             'font' => 'helvetica',
         );
 
-        $style2 = array(
-            'border' => false,
-            'vpadding' => 'auto',
-            'hpadding' => 'auto',
-            'fgcolor' => array(0, 0, 0),
-            'bgcolor' => false,
-            'module_width' => 1,
-            'module_height' => 1
-        );
-
         $html = '<b style="font-size:9px;">SUPP (V) ' . $arrayAsnInfo['supplierName'] . '</b>';
         $pdf->SetY(8.5 + $def_loc_y);
         $pdf->SetX(11.4);
@@ -90,19 +86,36 @@ function createASN($arrayAsnInfo)
         $supplierGSDBCodeLength = strlen($arrayAsnInfo['supplierGSDBCode']);
         $html = '<b style="font-size:52px;">' . $arrayAsnInfo['supplierGSDBCode'] . '</b>';
         $pdf->SetY(8.5 + $def_loc_y);
-        $pdf->SetX(150 - 10 * $supplierGSDBCodeLength);
+        $pdf->SetX(160 - 10 * $supplierGSDBCodeLength);
         $pdf->writeHTML($html, true, false, true, false, '');
 
         $pdf->write1DBarcode('V' . $arrayAsnInfo['supplierGSDBCode'], 'C128', 11.4, 11.5 + $def_loc_y, 53.9, 13.5, 0.4, $style, 'N'); // 9.5 * 1.41 = 13.5
 
         $pdf->writeHTML('<hr style="width:75%;text-align:left;margin-left:0">', true, false, true, false, '');
-        $pdf->write2DBarcode('A06AP  NT1B 17A950AB5YZ9  AQ432AVDP9JAAD20230301A8V0145AA1L3HAM19031ALVMAN923222Z109AAABCTN', 'PDF417', 150, 12 + $def_loc_y, 0, 0, $style2, 'N');
+
+        $html = '<b style="font-size:13px;font-weight:500">MASTER LABEL</b>';
+        $pdf->SetY(23 + $def_loc_y);
+        $pdf->SetX(158);
+        $pdf->writeHTML($html, true, false, true, false, '');
+
+        $zeroFiller = "000000000";
+        $zeros = substr($zeroFiller, 0, 9 - strlen(strval($labelNo)));
+        $plascamLabelContent = [
+            'T' . $zeros . $labelNo,
+            $arrayAsnInfo['partNumber'],
+            preg_replace('/\s+/', '', $arrayAsnInfo['order_number']),
+            $arrayAsnInfo['quantity'],
+            $arrayAsnInfo['container'],
+            ($arrayAsnInfo['lotBatch'] != "") ? str_replace('-', '.', $arrayAsnInfo['lotBatch']) : $dateYYMMDD
+        ];
+        $serial_number_text = implode('-', $plascamLabelContent);
+
+        $pdf->write2DBarcode($serial_number_text.'-'.$arrayAsnInfo['deliveryDocASNNumber'], 'DATAMATRIX', 160, 25 + $def_loc_y, 35, 35, $style, 'N');
 
         $html = '<b style="font-size:9px;">QTY (Q)</b>';
         $pdf->SetY(26 + $def_loc_y);
         $pdf->SetX(11.4);
         $pdf->writeHTML($html, true, false, true, false, '');
-
 
         $quantityLength = strlen($arrayAsnInfo['quantity']);
         $html = '<b style="font-size:52px;">' . $arrayAsnInfo['quantity'] . '</b>';
@@ -233,12 +246,11 @@ function createASN($arrayAsnInfo)
         $pdf->SetX(11.4);
         $pdf->writeHTML($html, true, false, true, false, '');
 
-        $html = '<b style="font-size:20px;">' . $arrayAsnInfo['labelNumber'] + $i . '</b>';
-        $pdf->SetY(117 + $def_loc_y);
-        $pdf->SetX(35);
+        $html = '<b style="font-size:9px;">' . $serial_number_text . '</b>';
+        $pdf->SetY(120 + $def_loc_y);
+        $pdf->SetX(33);
         $pdf->writeHTML($html, true, false, true, false, '');
-
-        $pdf->write1DBarcode('S' . $arrayAsnInfo['labelNumber'], 'C128', 11.4, 121 + $def_loc_y, '', 16, 0.4, $style, 'N');
+        $labelNo++;
 
         $pdf->Line(105, 109.5 + $def_loc_y, 105, 136 + $def_loc_y, $straightLineStyle); // vertical line
 
@@ -257,7 +269,7 @@ function createASN($arrayAsnInfo)
         $pdf->SetX(106);
         $pdf->writeHTML($html, true, false, true, false, '');
 
-        $html = '<b style="font-size:32px;">' . $arrayAsnInfo['customerPlantAltCode'] . '</b>';
+        $html = '<b style="font-size:32px;">' . $arrayAsnInfo['customerPlantCode'] . '</b>';
         $pdf->SetY(123 + $def_loc_y);
         $pdf->SetX(106);
         $pdf->writeHTML($html, true, false, true, false, '');
@@ -272,9 +284,10 @@ function createASN($arrayAsnInfo)
         $pdf->SetX(175);
         $pdf->writeHTML($html, true, false, true, false, '');
 
+        $quantityLength = strlen($arrayAsnInfo['dockCode']);
         $html = '<b style="font-size:52px;">' . $arrayAsnInfo['dockCode'] . '</b>';
         $pdf->SetY(120 + $def_loc_y);
-        $pdf->SetX(170);
+        $pdf->SetX(200 - $quantityLength * 10);
         $pdf->writeHTML($html, true, false, true, false, '');
     }
 

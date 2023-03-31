@@ -2,7 +2,7 @@
 
 require_once __DIR__.'/create_asn_arikan.php';
 
-$jsonFileName = dirname(dirname(__DIR__))."/data/data1.json";
+$jsonFileName = dirname(dirname(__DIR__))."/data/jaguar-data.json";
 
 // set main parameter
 $labelCollection = json_decode(file_get_contents($jsonFileName));
@@ -11,27 +11,28 @@ $despatchId = $labelCollection->despatch_id;
 $timestamp = $labelCollection->label_timestamp;
 
 $supplierNameOuter = $labelCollection->collection[0]->supplierName;
-$supplierGSDBCodeOuter = $labelCollection->collection[0]->supplierGSDBCode;
+$supplierGSDBCodeOuter = $labelCollection->collection[0]->supplierGsdb;
 $quantityOuter = $labelCollection->collection[0]->quantity;
 $quantityPackageOuter = $labelCollection->collection[0]->quantityPackage;
-$unitOfMeasureOuter = $labelCollection->collection[0]->unitOfMeasure;
+//$unitOfMeasureOuter = $labelCollection->collection[0]->unitOfMeasure;
 $containerOuter = $labelCollection->collection[0]->container;
+$uom = $labelCollection->collection[0]->uom;
 
 $grossWeightOuter = $labelCollection->collection[0]->grossWeight;
 $dateOuter = $labelCollection->collection[0]->date;
 $dateYYMMDDOuter = $labelCollection->collection[0]->dateYYMMDD;
 $lotBatchOuter = $labelCollection->collection[0]->lotBatch;
-$shiftOuter = $labelCollection->collection[0]->shift;
-$wcOuter = $labelCollection->collection[0]->wc;
+//$shiftOuter = $labelCollection->collection[0]->shift;
+//$wcOuter = $labelCollection->collection[0]->wc;
 $partNumberOuter = $labelCollection->collection[0]->partNumber;
-$storageLocationOuter = $labelCollection->collection[0]->storageLocation;
+//$storageLocationOuter = $labelCollection->collection[0]->storageLocation;
 $deliveryDocASNNumberOuter = $labelCollection->collection[0]->deliveryDocASNNumber;
 $descriptionOfPartOuter = $labelCollection->collection[0]->descriptionOfPart;
 $serialNumberOuter = $labelCollection->collection[0]->serialNumber;
 
 $customerPlantNameOuter = $labelCollection->collection[0]->customerPlantName;
 $customerPlantCodeOuter = $labelCollection->collection[0]->customerPlantCode;
-$customerPlantAltCodeOuter = $labelCollection->collection[0]->customerPlantAltCode;
+//$customerPlantAltCodeOuter = $labelCollection->collection[0]->customerPlantAltCode;
 $customerCodeOuter = $labelCollection->collection[0]->customerCode;
 $dockCodeOuter = $labelCollection->collection[0]->dockCode;
 $engAlertOuter = $labelCollection->collection[0]->engAlert;
@@ -73,23 +74,23 @@ $totalInner = $labelCollection->collection[0]->totalInner;
 
 $outerPackage = [
     "supplierName" => $supplierNameOuter,
-    "supplierGSDBCode" => $supplierGSDBCodeOuter,
+    "supplierGsdb" => $supplierGSDBCodeOuter,
     "quantity" => $quantityOuter,
-    "unitOfMeasure" => $unitOfMeasureOuter,
+    //"unitOfMeasure" => $unitOfMeasureOuter,
     "container" => $containerOuter,
     "grossWeight" => floor($grossWeightOuter),
     "weight_unit" => $weightUnit,
     "date" => $dateOuter,
     "lotBatch" => $lotBatchOuter,
-    "shift" => $shiftOuter,
-    "wc" => $wcOuter,
+    //"shift" => $shiftOuter,
+    //"wc" => $wcOuter,
     "partNumber" => $partNumberOuter,
-    "storageLocation" => $storageLocationOuter,
+    //"storageLocation" => $storageLocationOuter,
     "deliveryDocASNNumber" => $deliveryDocASNNumberOuter,
     "descriptionOfPart" => $descriptionOfPartOuter,
     "labelNumber" => $labelNumberOuter,
     "customerPlantName" => $customerPlantNameOuter,
-    "customerPlantAltCode" => $customerPlantAltCodeOuter,
+    //"customerPlantAltCode" => $customerPlantAltCodeOuter,
     "dockCode" => $dockCodeOuter,
     "engAlert" => $engAlertOuter,
     "serialNumber" => $serialNumberOuter,
@@ -98,7 +99,8 @@ $outerPackage = [
     "ftime" => $timestamp,
     "despatch_package_id" => $despatchPackageIdOuter,
     "fk_despatch_package_id" => $fkDespatchPackageIdOuter,
-    "despatch_id" => $despatchId
+    "despatch_id" => $despatchId,
+    "uom" => $uom
 ];
 
 createASN($outerPackage); die;
@@ -109,27 +111,28 @@ if(!isset($labelCollection->collection[1])){
 
 // inner package
 $supplierNameInner = $labelCollection->collection[1]->supplierName;
-$supplierGSDBCodeInner = $labelCollection->collection[1]->supplierGSDBCode;
+$supplierGSDBCodeInner = $labelCollection->collection[1]->supplierGsdb;
 $quantityInner = $labelCollection->collection[1]->quantity;
 $quantityPackageInner = $labelCollection->collection[1]->quantityPackage;
-$unitOfMeasureInner = $labelCollection->collection[1]->unitOfMeasure;
+//$unitOfMeasureInner = $labelCollection->collection[1]->unitOfMeasure;
 $containerInner = $labelCollection->collection[1]->container;
+$uom = $labelCollection->collection[1]->uom;
 
 $grossWeightInner = $labelCollection->collection[1]->grossWeight;
 $dateInner = $labelCollection->collection[1]->date;
 $dateYYMMDDInner = $labelCollection->collection[1]->dateYYMMDD;
 $lotBatchInner = $labelCollection->collection[1]->lotBatch;
-$shiftInner = $labelCollection->collection[1]->shift;
-$wcInner = $labelCollection->collection[1]->wc;
+//$shiftInner = $labelCollection->collection[1]->shift;
+//$wcInner = $labelCollection->collection[1]->wc;
 $partNumberInner = $labelCollection->collection[1]->partNumber;
-$storageLocationInner = $labelCollection->collection[1]->storageLocation;
+//$storageLocationInner = $labelCollection->collection[1]->storageLocation;
 $deliveryDocASNNumberInner = $labelCollection->collection[1]->deliveryDocASNNumber;
 $descriptionOfPartInner = $labelCollection->collection[1]->descriptionOfPart;
 $serialNumberInner = $labelCollection->collection[1]->serialNumber;
 
 $customerPlantNameInner = $labelCollection->collection[1]->customerPlantName;
 $customerPlantCodeInner = $labelCollection->collection[1]->customerPlantCode;
-$customerPlantAltCodeInner = $labelCollection->collection[1]->customerPlantAltCode;
+//$customerPlantAltCodeInner = $labelCollection->collection[1]->customerPlantAltCode;
 $customerCodeInner = $labelCollection->collection[1]->customerCode;
 $dockCodeInner = $labelCollection->collection[1]->dockCode;
 $engAlertInner = $labelCollection->collection[1]->engAlert;
@@ -151,24 +154,24 @@ $companyPrefixInner = $labelCollection->collection[1]->companyPrefix;
 
 $innerPackage = [
     "supplierName" => $supplierNameInner,
-    "supplierGSDBCode" => $supplierGSDBCodeInner,
+    "supplierGsdb" => $supplierGSDBCodeInner,
     "quantity" => $quantityInner,
-    "unitOfMeasure" => $unitOfMeasureInner,
+    //"unitOfMeasure" => $unitOfMeasureInner,
     "container" => $containerInner,
     "grossWeight" => floor($grossWeightInner),
     "weight_unit" => $weightUnit,
     "date" => $dateInner,
     "lotBatch" => $lotBatchInner,
-    "shift" => $shiftInner,
-    "wc" => $wcInner,
+    //"shift" => $shiftInner,
+    //"wc" => $wcInner,
     "serialNumber" => $serialNumberInner,
     "partNumber" => $partNumberInner,
-    "storageLocation" => $storageLocationInner,
+    //"storageLocation" => $storageLocationInner,
     "deliveryDocASNNumber" => $deliveryDocASNNumberInner,
     "descriptionOfPart" => $descriptionOfPartInner,
     "labelNumber" => $labelNumberInner,
     "customerPlantName" => $customerPlantNameInner,
-    "customerPlantAltCode" => $customerPlantAltCodeInner,
+    //"customerPlantAltCode" => $customerPlantAltCodeInner,
     "dockCode" => $dockCodeInner,
     "engAlert" => $engAlertInner,
     "quantityPackage" => $quantityPackageInner,
@@ -176,7 +179,8 @@ $innerPackage = [
     "ftime" => $timestamp,
     "despatch_package_id" => $despatchPackageIdInner,
     "fk_despatch_package_id" => $fkDespatchPackageIdInner,
-    "despatch_id" => $despatchId
+    "despatch_id" => $despatchId,
+    "uom" => $uom
 ];
 
  createASN($innerPackage);

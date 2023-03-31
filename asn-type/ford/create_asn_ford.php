@@ -45,6 +45,12 @@ function createASN($arrayAsnInfo)
     // set font
     $pdf->SetFont('helvetica', '', 11);
 
+    // set parameter for 2d barcode
+    $complianceIndicator = '[)>';
+    $groupSeparator = hex2bin('1D');
+    $recordSeparator = hex2bin('1E');
+    $messageTrailer = hex2bin('04');
+
     $quantity_package = $arrayAsnInfo['quantityPackage'];
     for ($i = 0; $i < $quantity_package; $i++) {
 
@@ -96,8 +102,22 @@ function createASN($arrayAsnInfo)
 
         $pdf->write1DBarcode('V' . $arrayAsnInfo['supplierGSDBCode'], 'C128', 11.4, 11.5 + $def_loc_y, 53.9, 13.5, 0.4, $style, 'N'); // 9.5 * 1.41 = 13.5
 
+        $text_2D_barcode = $complianceIndicator . $recordSeparator . '06' .
+            $groupSeparator . str_replace("-", " ", $arrayAsnInfo['partNumber']) .
+            $groupSeparator . 'Q' . $arrayAsnInfo['quantity'] .
+            $groupSeparator . 'V' . $arrayAsnInfo['supplierGSDBCode'] .
+            $groupSeparator . 'D' . $arrayAsnInfo['dateYYMMDD'] .
+            $groupSeparator . '8V' . $arrayAsnInfo['customerPlantAltCode'] .
+            $groupSeparator . '1L' . $arrayAsnInfo['dockCode'] .
+            $groupSeparator . ($arrayAsnInfo['isMaster'] ? 'M' : 'S') . $arrayAsnInfo['labelNumber'] .
+            $groupSeparator . 'L' . $arrayAsnInfo['storageLocation'] .
+            $groupSeparator . 'N' . $arrayAsnInfo['deliveryDocASNNumber'] .
+            $groupSeparator . 'B' . $arrayAsnInfo['container'] .
+            $groupSeparator . 'Z' . round($arrayAsnInfo['grossWeight']) .
+            $recordSeparator . $messageTrailer; 
+            
         $pdf->writeHTML('<hr style="width:75%;text-align:left;margin-left:0">', true, false, true, false, '');
-        $pdf->write2DBarcode('[)>A06AP  NT1B 17A950AB5YZ9  AQ432AVDP9JAAD20230301A8V0145AA1L3HAM19031ALVMAN923222Z109AAABCTN', 'PDF417', 150, 12 + $def_loc_y, 0, 0, $style2, 'N');
+        $pdf->write2DBarcode($text_2D_barcode, 'PDF417', 150, 12 + $def_loc_y, 0, 0, $style2, 'N');
 
         $html = '<b style="font-size:9px;">QTY <br> (Q)</b>';
         $pdf->SetY(26 + $def_loc_y);

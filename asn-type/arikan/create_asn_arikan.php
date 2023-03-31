@@ -142,9 +142,8 @@ function createASN($arrayAsnInfo)
         $pdf->SetX(142);
         $pdf->writeHTML($html, true, false, true, false, '');
 
-        $arrayAsnInfo['uom'] = "undefined";
         $arrayAsnInfo['transportIdentifier'] = "34glsn44";
-        $text_qrcode = $arrayAsnInfo['supplierGSDBCode'] . "~" . $arrayAsnInfo['supplierName'] . "~" . $arrayAsnInfo['partNumber'] . "~" . $arrayAsnInfo['quantity'] . "~" . $arrayAsnInfo['uom'] . "~" . $arrayAsnInfo['descriptionOfPart']
+        $text_qrcode = $arrayAsnInfo['supplierGsdb'] . "~" . $arrayAsnInfo['supplierName'] . "~" . $arrayAsnInfo['partNumber'] . "~" . $arrayAsnInfo['quantity'] . "~" . $arrayAsnInfo['uom'] . "~" . $arrayAsnInfo['descriptionOfPart']
                         . "~" . $arrayAsnInfo['transportIdentifier'] . "~" . $arrayAsnInfo['date'] . "~" . $arrayAsnInfo['deliveryDocASNNumber'] . "~" . $arrayAsnInfo['serialNumber'];
 
         $pdf->write2DBarcode($text_qrcode, 'QRCODE,Q', 155, 43 + $def_loc_y, 30, 30, $style, 'N');

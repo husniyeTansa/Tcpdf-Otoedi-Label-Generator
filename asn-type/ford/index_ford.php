@@ -97,7 +97,9 @@ $outerPackage = [
     "ftime" => $timestamp,
     "despatch_package_id" => $despatchPackageIdOuter,
     "fk_despatch_package_id" => $fkDespatchPackageIdOuter,
-    "despatch_id" => $despatchId
+    "despatch_id" => $despatchId,
+    "isMaster" => $isMasterOuter,
+    "dateYYMMDD" => $dateYYMMDDOuter
 ];
 
 createASN($outerPackage);
@@ -174,7 +176,9 @@ $innerPackage = [
     "ftime" => $timestamp,
     "despatch_package_id" => $despatchPackageIdInner,
     "fk_despatch_package_id" => $fkDespatchPackageIdInner,
-    "despatch_id" => $despatchId
+    "despatch_id" => $despatchId,
+    "isMaster" => $isMasterInner,
+    "dateYYMMDD" => $dateYYMMDDInner
 ];
 
  createASN($innerPackage);

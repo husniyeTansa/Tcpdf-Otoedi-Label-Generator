@@ -2,7 +2,7 @@
 
 require_once __DIR__.'/create_asn_plascam.php';
 
-$jsonFileName = dirname(dirname(__DIR__))."/data/data1.json";
+$jsonFileName = dirname(dirname(__DIR__))."/data/plascam-global-data.json";
 
 // set main parameter
 $labelCollection = json_decode(file_get_contents($jsonFileName));
@@ -31,13 +31,14 @@ $serialNumberOuter = $labelCollection->collection[0]->serialNumber;
 
 $customerPlantNameOuter = $labelCollection->collection[0]->customerPlantName;
 $customerPlantCodeOuter = $labelCollection->collection[0]->customerPlantCode;
-$customerPlantAltCodeOuter = $labelCollection->collection[0]->customerPlantAltCode;
+//$customerPlantAltCodeOuter = $labelCollection->collection[0]->customerPlantAltCode;
 $customerCodeOuter = $labelCollection->collection[0]->customerCode;
 $dockCodeOuter = $labelCollection->collection[0]->dockCode;
 $engAlertOuter = $labelCollection->collection[0]->engAlert;
 $packageQuantityOuter = $labelCollection->collection[0]->packageQuantity;
 $is_labeledOuter = $labelCollection->collection[0]->is_labeled;
 $isMasterOuter = $labelCollection->collection[0]->isMaster;
+$order_numberOuter = $labelCollection->collection[0]->inners[0]->order_number;
 
 $copyOuter = $labelCollection->collection[0]->copy;
 $isMixOuter = $labelCollection->collection[0]->is_mix;
@@ -89,7 +90,7 @@ $outerPackage = [
     "descriptionOfPart" => $descriptionOfPartOuter,
     "labelNumber" => $labelNumberOuter,
     "customerPlantName" => $customerPlantNameOuter,
-    "customerPlantAltCode" => $customerPlantAltCodeOuter,
+    "customerPlantCode" => $customerPlantCodeOuter,
     "dockCode" => $dockCodeOuter,
     "engAlert" => $engAlertOuter,
     "quantityPackage" => $quantityPackageOuter,
@@ -97,14 +98,16 @@ $outerPackage = [
     "ftime" => $timestamp,
     "despatch_package_id" => $despatchPackageIdOuter,
     "fk_despatch_package_id" => $fkDespatchPackageIdOuter,
-    "despatch_id" => $despatchId
+    "despatch_id" => $despatchId,
+    "order_number" => $order_numberOuter,
+    "dateYYMMDD" => $dateYYMMDDOuter
 ];
 
 createASN($outerPackage);
 
 if(!isset($labelCollection->collection[1])){
     return;
-}
+} die;
 
 // inner package
 $supplierNameInner = $labelCollection->collection[1]->supplierName;
@@ -128,7 +131,7 @@ $serialNumberInner = $labelCollection->collection[1]->serialNumber;
 
 $customerPlantNameInner = $labelCollection->collection[1]->customerPlantName;
 $customerPlantCodeInner = $labelCollection->collection[1]->customerPlantCode;
-$customerPlantAltCodeInner = $labelCollection->collection[1]->customerPlantAltCode;
+//$customerPlantAltCodeInner = $labelCollection->collection[1]->customerPlantAltCode;
 $customerCodeInner = $labelCollection->collection[1]->customerCode;
 $dockCodeInner = $labelCollection->collection[1]->dockCode;
 $engAlertInner = $labelCollection->collection[1]->engAlert;
@@ -166,7 +169,7 @@ $innerPackage = [
     "descriptionOfPart" => $descriptionOfPartInner,
     "labelNumber" => $labelNumberInner,
     "customerPlantName" => $customerPlantNameInner,
-    "customerPlantAltCode" => $customerPlantAltCodeInner,
+    "customerPlantCode" => $customerPlantCodeInner,
     "dockCode" => $dockCodeInner,
     "engAlert" => $engAlertInner,
     "quantityPackage" => $quantityPackageInner,
@@ -174,7 +177,9 @@ $innerPackage = [
     "ftime" => $timestamp,
     "despatch_package_id" => $despatchPackageIdInner,
     "fk_despatch_package_id" => $fkDespatchPackageIdInner,
-    "despatch_id" => $despatchId
+    "despatch_id" => $despatchId,
+    "order_number" => $order_numberOuter,
+    "dateYYMMDD" => $dateYYMMDDInner
 ];
 
  createASN($innerPackage);
