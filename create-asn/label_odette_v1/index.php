@@ -57,7 +57,7 @@ $innerQuantityPackage = $labelCollection->collection[0]->inners[0]->quantity_pac
 $batchNumber = $labelCollection->collection[0]->inners[0]->batch_number;
 $innerLabelNumber = $labelCollection->collection[0]->inners[0]->label_number;
 $innerGrossWeight = $labelCollection->collection[0]->inners[0]->gross_weight;
-$netWeight = $labelCollection->collection[0]->net_weight;
+$netWeight = $labelCollection->collection[0]->netWeight;
 
 $weightUnit = $labelCollection->collection[0]->inners[0]->weight_unit;
 $buyerCode = $labelCollection->collection[0]->inners[0]->buyer_code;
