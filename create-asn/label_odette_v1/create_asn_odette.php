@@ -151,7 +151,7 @@ function createASN($arrayAsnInfo)
 
         $pdf->Line(175, 33 + $def_loc_y, 175, 46 + $def_loc_y, $straightLineStyle); // vertical line 3
 
-        $html = '<b style="font-size:8px;">NO OF</b>'; // BOXES
+        $html = '<b style="font-size:8px;">NO OF BOXES</b>'; // BOXES
         $pdf->SetY(34 + $def_loc_y);
         $pdf->SetX(179.4);
         $pdf->writeHTML($html, true, false, true, false, '');
@@ -243,7 +243,7 @@ function createASN($arrayAsnInfo)
 
         $pdf->Line(145, 115 + $def_loc_y, 145, 126 + $def_loc_y, $straightLineStyle); // vertical line 5
 
-        $html = '<b style="font-size:8px;">ENGR. CHSNGE</b>';
+        $html = '<b style="font-size:8px;">ENGR. CHANGE</b>';
         $pdf->SetY(116 + $def_loc_y);
         $pdf->SetX(147);
         $pdf->writeHTML($html, true, false, true, false, '');
