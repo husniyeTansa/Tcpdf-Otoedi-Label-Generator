@@ -173,7 +173,7 @@ function createASN($arrayAsnInfo)
         $pdf->SetX(4);
         $pdf->writeHTML($html, true, false, true, false, '');
 
-        $pdf->write1DBarcode('S'. $arrayAsnInfo['partNumber'], 'C128', 5, 58 + $def_loc_y, '', 19, 0.6, $style, 'N');
+        $pdf->write1DBarcode('P'. $arrayAsnInfo['partNumber'], 'C128', 5, 58 + $def_loc_y, '', 19, 0.6, $style, 'N');
 
         $pdf->Line(0, 75 + $def_loc_y, 210, 75 + $def_loc_y, $straightLineStyle); // horizontal 4 all row
 
@@ -270,7 +270,7 @@ function createASN($arrayAsnInfo)
          $serial_number = intval($arrayAsnInfo['labelNumber']) + $i;
          $serial_number = getSerialNumber($extension_digit, $arrayAsnInfo['companyPrefix'], $serial_number);
 
-        $pdf->write1DBarcode('086839857000237305', 'C128', 5, 129 + $def_loc_y, '', 20, 0.6, $style, 'N');
+        $pdf->write1DBarcode($serial_number, 'C128', 5, 129 + $def_loc_y, '', 20, 0.6, $style, 'N');
 
         $html = '<b style="font-size:8px;">BATCH NUMBER (H)</b>';
         $pdf->SetY(127 + $def_loc_y);
@@ -282,7 +282,7 @@ function createASN($arrayAsnInfo)
         $pdf->SetX(135);
         $pdf->writeHTML($html, true, true, true, false, '');
 
-        $pdf->write1DBarcode('230316001', 'C128', 110, 130 + $def_loc_y, '', 20, 0.6, $style, 'N');
+        $pdf->write1DBarcode($arrayAsnInfo['lotBatch'], 'C128', 110, 130 + $def_loc_y, '', 20, 0.6, $style, 'N');
 
     }
 
